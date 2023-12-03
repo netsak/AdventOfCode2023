@@ -45,3 +45,21 @@ func ReadLines(filename string) ([]string, error) {
 	}
 	return ret, nil
 }
+
+// ExtendRows extends the string grid by count rows/columns
+// in each direction filled with specified string
+func ExtendRows(rows []string, fill string, count int) []string {
+	emptyRow := strings.Repeat(fill, len(rows[0])+2*count)
+	ret := []string{}
+	for i := 0; i < count; i++ {
+		ret = append(ret, emptyRow)
+	}
+	emptyCol := strings.Repeat(fill, count)
+	for _, line := range rows {
+		ret = append(ret, emptyCol+line+emptyCol)
+	}
+	for i := 0; i < count; i++ {
+		ret = append(ret, emptyRow)
+	}
+	return ret
+}
